@@ -18,18 +18,18 @@ Upstream links:
 
 * Initialize the `$OVPN_DATA` container that will hold the configuration files and certificates
 
-        docker run --volumes-from $OVPN_DATA --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM
+        docker run --volumes-from $OVPN_DATA --rm kylemanna/openvpn ovpn_genconfig -u tcp://VPN.SERVERNAME.COM
         docker run --volumes-from $OVPN_DATA --rm -it kylemanna/openvpn ovpn_initpki
 
 * Start OpenVPN server process
 
     - On Docker [version 1.2](http://blog.docker.com/2014/08/announcing-docker-1-2-0/) and newer
 
-            docker run --volumes-from $OVPN_DATA -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
+            docker run --volumes-from $OVPN_DATA -d -p 1194:1194/tcp --cap-add=NET_ADMIN kylemanna/openvpn
 
     - On Docker older than version 1.2
 
-            docker run --volumes-from $OVPN_DATA -d -p 1194:1194/udp --privileged kylemanna/openvpn
+            docker run --volumes-from $OVPN_DATA -d -p 1194:1194/tcp --privileged kylemanna/openvpn
 
 * Generate a client certificate without a passphrase
 
@@ -76,7 +76,7 @@ is rooted.
 The topology used is `net30`, because it works on the widest range of OS.
 `p2p`, for instance, does not work on Windows.
 
-The UDP server uses`192.168.255.0/24` for dynamic clients by default.
+The tcp server uses`192.168.255.0/24` for dynamic clients by default.
 
 The client profile specifies `redirect-gateway def1`, meaning that after
 establishing the VPN connection, all traffic will go through the VPN.

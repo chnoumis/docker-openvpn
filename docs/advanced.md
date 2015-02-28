@@ -9,7 +9,7 @@ The ovpn_genconfig script is intended for simple configurations that apply to th
 
         mkdir openvpn0
         cd openvpn0
-        docker run --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM:1194
+        docker run --rm -v $PWD:/etc/openvpn kylemanna/openvpn ovpn_genconfig -u tcp://VPN.SERVERNAME.COM:1194
         docker run --rm -v $PWD:/etc/openvpn -it kylemanna/openvpn ovpn_initpki
         vim openvpn.conf
         docker run --rm -v $PWD:/etc/openvpn -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass
@@ -17,5 +17,5 @@ The ovpn_genconfig script is intended for simple configurations that apply to th
 
 * Start the server with:
 
-        docker run -v $PWD:/etc/openvpn -d -p 1194:1194/udp --privileged kylemanna/openvpn
+        docker run -v $PWD:/etc/openvpn -d -p 1194:1194/tcp --privileged kylemanna/openvpn
 

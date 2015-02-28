@@ -105,8 +105,8 @@ while getopts ":r:s:du:cp:DNm:" opt; do
 done
 
 
-# Server name is in the form "udp://vpn.example.com:1194"
-if [[ "$OVPN_SERVER_URL" =~ ^((udp|tcp)://)?([0-9a-zA-Z\.\-]+)(:([0-9]+))?$ ]]; then
+# Server name is in the form "tcp://vpn.example.com:1194"
+if [[ "$OVPN_SERVER_URL" =~ ^((tcp|tcp)://)?([0-9a-zA-Z\.\-]+)(:([0-9]+))?$ ]]; then
     OVPN_PROTO=${BASH_REMATCH[2]};
     OVPN_CN=${BASH_REMATCH[3]};
     OVPN_PORT=${BASH_REMATCH[5]};
@@ -118,7 +118,7 @@ else
 fi
 
 # Apply defaults
-[ -z "$OVPN_PROTO" ] && OVPN_PROTO=udp
+[ -z "$OVPN_PROTO" ] && OVPN_PROTO=tcp
 [ -z "$OVPN_PORT" ] && OVPN_PORT=1194
 [ ${#OVPN_ROUTES[@]} -eq 0 ] && OVPN_ROUTES=("192.168.254.0/24")
 
